@@ -51,6 +51,11 @@
         p {
             font-size: 18px;
         }
+        .ddd {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+            }
     </style>
     <script>
         let tabOpened = false;
@@ -173,9 +178,12 @@
 </head>
 <body>
     <div id="game">
-        <button id="incrementBtn">Increment Point</button>
+
     </div>
     <div class="container">
+            <div class="ddd">
+                <button id="incrementBtn">Increment Point</button>
+            </div>
         <div style="font-weight: 600;" id="timer">Timer: 60s</div>
         <div style="font-weight: 600;" id="points">Points: 0</div>
     </div>
