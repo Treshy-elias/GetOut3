@@ -1,0 +1,203 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prank Website</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        h1, p {
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Prank Site!</h1>
+    <p>Click the button below three times to exit.</p>
+    <button id="exitButton">Click me three times to exit</button>
+
+    <script>
+        let clickCount = 0;
+
+        document.getElementById('exitButton').addEventListener('click', () => {
+            clickCount++;
+            if (clickCount >= 3) {
+                window.onbeforeunload = null; // Allow the user to leave the page
+                window.location.href = 'about:blank'; // Redirect to a blank page
+            }
+        });
+
+        window.onbeforeunload = function () {
+            return "Are you sure you want to leave?";
+        };
+
+        // Prevent back button navigation
+        history.pushState(null, null, location.href);
+        window.onpopstate = function () {
+            history.go(1);
+        };
+    </script>
+</body>
+</html>
+ <!-- --><!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Prank Page</title>
+        <style>
+            #game {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                text-align: center;
+            }
+            #timer, #points {
+                font-size: 20px;
+                margin: 10px 0;
+            }
+            #overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.8);
+                color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                display: none;
+            }
+            #overlay button {
+                margin: 10px;
+            }
+        </style>
+        <script>
+            let tabOpened = false;
+            const initialTime = 60; // 1 minute in seconds
+    
+            // Function to check focus and open a new tab if necessary
+            function checkFocusOnce() {
+                if (!tabOpened && (document.hidden || !document.hasFocus())) {
+                    tabOpened = true;
+                    window.open(window.location.href, '_blank');
+                }
+            }
+    
+            function resetTabOpened() {
+                if (!document.hidden && document.hasFocus()) {
+                    tabOpened = false;
+                }
+            }
+    
+            // Timer and points management
+            function startGame() {
+                let timer = parseInt(localStorage.getItem('timer')) || initialTime;
+                let points = parseInt(localStorage.getItem('points')) || 0;
+    
+                // Update timer and points display
+                document.getElementById('timer').textContent = `Timer: ${timer}s`;
+                document.getElementById('points').textContent = `Points: ${points}`;
+    
+                // Timer countdown function
+                function countdown() {
+                    if (timer > 0) {
+                        timer--;
+                        localStorage.setItem('timer', timer);
+                    } else {
+                        points = 0;
+                        localStorage.setItem('points', points);
+                        timer = initialTime;
+                        localStorage.setItem('timer', timer);
+                    }
+                    document.getElementById('timer').textContent = `Timer: ${timer}s`;
+                    document.getElementById('points').textContent = `Points: ${points}`;
+                }
+    
+                // Increment points function
+                document.getElementById('incrementBtn').addEventListener('click', () => {
+                    points++;
+                    localStorage.setItem('points', points);
+                    document.getElementById('points').textContent = `Points: ${points}`;
+                    if (points >= 110) {
+                        showOverlay();
+                    }
+                });
+    
+                // Start the countdown
+                setInterval(countdown, 1000);
+            }
+    
+            function showOverlay() {
+                document.getElementById('overlay').style.display = 'flex';
+            }
+    
+            function copyToClipboard() {
+                const url = window.location.href;
+                navigator.clipboard.writeText(url).then(() => {
+                    alert('Link copied to clipboard!');
+                }).catch(err => {
+                    alert('Failed to copy link');
+                });
+            }
+    
+            function quitGame() {
+                window.location.href = 'https://www.google.com';
+            }
+    
+            // Event listeners for tab focus management
+            window.addEventListener('blur', function() {
+                setTimeout(function() {
+                    checkFocusOnce();
+                }, 100);
+            });
+    
+            document.addEventListener('visibilitychange', function() {
+                setTimeout(function() {
+                    checkFocusOnce();
+                }, 100);
+            });
+    
+            window.addEventListener('focus', function() {
+                setTimeout(function() {
+                    resetTabOpened();
+                }, 100);
+            });
+    
+            // Prevent back button navigation
+            history.pushState(null, null, location.href);
+            window.onpopstate = function () {
+                history.go(1);
+            };
+    
+            window.onload = startGame;
+        </script>
+    </head>
+    <body>
+        <div id="game">
+            <div id="timer">Timer: 60s</div>
+            <div id="points">Points: 0</div>
+            <button id="incrementBtn">Increment Point</button>
+        </div>
+        <div id="overlay">
+            <h2>Congrats, wow, that was quick. But I don't want to believe you are too good to suffer alone.</h2>
+            <p>Click the share link below</p>
+            <button onclick="copyToClipboard()">Share</button>
+            <button onclick="quitGame()">Quit</button>
+        </div>
+    </body>
+    </html>
+    
