@@ -20,7 +20,7 @@
             font-family: sans-serif;
         }
         #game {
-            margin: 50px 0;
+            margin: 45px 0;
             text-align: center;
         }
         #timer, #points {
@@ -41,9 +41,15 @@
             flex-direction: column;
             display: none;
         }
-        #overlay button {
-            margin: 10px;
-        }
+            #overlay button {
+                margin: 10px;
+                font-size: 16px;
+                width: 100px;
+                height: 30px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
         #incrementBtn {
             padding: 8px 11px;
             font-size: 20px;
@@ -107,7 +113,7 @@
                 localStorage.setItem('points', points);
                 localStorage.setItem('clickCount', clickCount);
                 document.getElementById('points').textContent = `Points: ${points}`;
-                if (points >= 110) {
+                if (points >= 90) {
                     showOverlay();
                 }
 
@@ -190,7 +196,7 @@
     <div class="info">
         <h6 style="font-size: 18px; color: green;">1000+ played</h6>
         <p>Curiosity kills the cat. No one sent you to click the link but now you are here, let's play a game.</p>
-        <p>You don't get to leave the site unless you have gotten 110 points.</p>
+        <p>You don't get to leave the site unless you have gotten 90 points.</p>
         <h4>Note</h4>
         <p style="font-weight: 500; color: red;">-Don't use the cancel button on your phone</p>
         <p style="font-weight: 500; color: red;">-The problem is just that google ads won't let you do that in time. So click fast</p>
