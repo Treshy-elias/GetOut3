@@ -1,66 +1,20 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prank Website</title>
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            font-family: Arial, sans-serif;
-        }
-        h1, p {
-            text-align: center;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-        }
-    </style>
-</head>
-<body>
-    <h1>Welcome to the Prank Site!</h1>
-    <p>Click the button below three times to exit.</p>
-    <button id="exitButton">Click me three times to exit</button>
-
-    <script>
-        let clickCount = 0;
-
-        document.getElementById('exitButton').addEventListener('click', () => {
-            clickCount++;
-            if (clickCount >= 3) {
-                window.onbeforeunload = null; // Allow the user to leave the page
-                window.location.href = 'about:blank'; // Redirect to a blank page
-            }
-        });
-
-        window.onbeforeunload = function () {
-            return "Are you sure you want to leave?";
-        };
-
-        // Prevent back button navigation
-        history.pushState(null, null, location.href);
-        window.onpopstate = function () {
-            history.go(1);
-        };
-    </script>
-</body>
-</html>
- <!-- --><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Prank Page</title>
         <style>
+            body {
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+                background: linear-gradient(to top, cyan, gray);
+                font-family: sans-serif;
+
+            }
             #game {
-                position: absolute;
-                top: 20px;
-                right: 20px;
+                margin: 50px 0;
                 text-align: center;
             }
             #timer, #points {
@@ -83,6 +37,13 @@
             }
             #overlay button {
                 margin: 10px;
+            }
+            #incrementBtn {
+                padding: 8px 11px;
+                font-size: 20px;
+            }
+            p {
+                font-size: 18px;
             }
         </style>
         <script>
@@ -188,9 +149,24 @@
     </head>
     <body>
         <div id="game">
-            <div id="timer">Timer: 60s</div>
-            <div id="points">Points: 0</div>
+
             <button id="incrementBtn">Increment Point</button>
+        </div>
+        <div class="container">
+            <div style="font-weight: 600;" id="timer">Timer: 60s</div>
+            <div style="font-weight: 600;" id="points">Points: 0</div>
+        </div>
+        <div class="info">
+            <h6 style="font-size: 18px; color: green;">500+ played</h6>
+            <p>Curiousity kills the cat. No one sent you to click the link but now you are here, let play a game. </p>
+            <p>You don't get to leave the site, onless you have gotten 110 points.</p>
+            <h4>Note</h4>
+            <p style="font-weight: 500; color: red;">-Don't use the cancel button on your phone</p>
+            <p style="font-weight: 500; color: red;">-The problem is just that google ads won't let you do that in time. So click fast</p>
+            <p style="font-weight: 500; color: red;">-Ohh i forgot. When the timer gets to 0, your point gets to zero as well</p>
+        </div>
+        <div class="footer">
+            created by JoblessDudes. &copy; copyright 2024
         </div>
         <div id="overlay">
             <h2>Congrats, wow, that was quick. But I don't want to believe you are too good to suffer alone.</h2>
